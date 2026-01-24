@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-icons/all-files": "^4.1.0",
     "@tailwindcss/vite": "^4.1.18",
+    "@tanstack/react-query": "^5.90.20",
     "axios": "^1.13.2",
     "framer-motion": "^12.29.0",
     "react": "^19.2.0",
