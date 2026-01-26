@@ -44,7 +44,7 @@ const DashboardLayout = () => {
                 </NavLink>
         </li>
         <li>
-            <NavLink to="my-assets" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Assets">
+            <NavLink to="add-asset" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Assets">
                 <MdAddToQueue />
 
                 <span className="is-drawer-close:hidden">Add Assets</span>
