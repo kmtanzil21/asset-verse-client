@@ -7,6 +7,7 @@ import DashboardLayout from "../Pages/DashboardLayout";
 import PrivateRoute from "./PrivateRoute";
 import MyAssets from "../Pages/MyAssets";
 import AddAsset from "../Pages/AddAsset";
+import Assets from "../Pages/Assets";
 
 export const router= createBrowserRouter([
     {
@@ -24,6 +25,10 @@ export const router= createBrowserRouter([
             {
                 path:'/login',
                 Component:Login
+            },
+            {
+                path:'/assets',
+                Component:Assets
             }
         ]
     },

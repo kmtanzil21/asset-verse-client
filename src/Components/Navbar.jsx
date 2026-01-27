@@ -31,6 +31,7 @@ const Navbar = () => {
             {user && (
                 <>
                     <li><NavLink to="/dashboard/my-assets">My Assets</NavLink></li>
+                    <li><NavLink to="/assets">Assets</NavLink></li>
                     
                 </>
             )}
