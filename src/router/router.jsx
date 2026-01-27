@@ -8,6 +8,7 @@ import PrivateRoute from "./PrivateRoute";
 import MyAssets from "../Pages/MyAssets";
 import AddAsset from "../Pages/AddAsset";
 import Assets from "../Pages/Assets";
+import RequestList from "../Pages/RequestList";
 
 export const router= createBrowserRouter([
     {
@@ -45,6 +46,10 @@ export const router= createBrowserRouter([
             {
                 path:'add-asset',
                 Component: AddAsset
+            },
+            {
+                path:'request-list',
+                Component: RequestList
             }
         ]
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, Outlet } from 'react-router';
 import { BiSolidDevices } from "react-icons/bi";
-import { MdAddToQueue } from "react-icons/md";
+import { MdAddToQueue, MdFormatListBulletedAdd } from "react-icons/md";
 
 
 
@@ -44,10 +44,18 @@ const DashboardLayout = () => {
                 </NavLink>
         </li>
         <li>
-            <NavLink to="add-asset" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Assets">
+            <NavLink to="add-asset" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Add Assets">
                 <MdAddToQueue />
 
                 <span className="is-drawer-close:hidden">Add Assets</span>
+                </NavLink>
+        </li>
+        <li>
+            <NavLink to="request-list" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Request List">
+                <MdFormatListBulletedAdd />
+
+
+                <span className="is-drawer-close:hidden">Request List</span>
                 </NavLink>
         </li>
 

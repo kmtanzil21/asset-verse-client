@@ -1,10 +1,51 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { FaEdit, FaTrashAlt, FaHandPointer } from "react-icons/fa";
 import { AuthContext } from '../Contexts/AuthContext';
+import useAxios from '../hooks/useAxios';
 
-const AssetCard = ({ asset, onDelete, onRequest }) => {
-    const { role } = useContext(AuthContext); // Get role from context
+const AssetCard = ({ asset, onDelete }) => {
+    const { role } = useContext(AuthContext);
     const { _id, productName, productType, productQuantity, productImage, dateAdded } = asset;
+    const { user } = useContext(AuthContext);
+    const axiosPublic = useAxios();
+
+    // Retrieve request status from localStorage (if available)
+    const [requestStatus, setRequestStatus] = useState(() => {
+        const savedStatus = localStorage.getItem(`requestStatus_${_id}`);
+        return savedStatus ? savedStatus : null;
+    });
+
+    const handleRequest = async (asset) => {
+        try {
+            setRequestStatus('pending');
+            localStorage.setItem(`requestStatus_${_id}`, 'pending'); // Save to localStorage
+
+            const response = await axiosPublic.post('/request-asset', {
+                assetId: asset._id,
+                email: user.email,
+                name:user.displayName,
+                assetName:asset.productName
+            });
+
+            if (response.data) {
+                setRequestStatus('requested');
+                localStorage.setItem(`requestStatus_${_id}`, 'requested'); // Update localStorage
+                alert('Asset requested successfully');
+            }
+        } catch (error) {
+            setRequestStatus(null);
+            localStorage.setItem(`requestStatus_${_id}`, null); // Clear from localStorage
+            alert('Failed to request asset');
+        }
+    };
+
+    useEffect(() => {
+        // Ensure that if the status is set externally (e.g., after a successful request)
+        // we sync it with localStorage (this could also be done on backend if needed)
+        if (requestStatus) {
+            localStorage.setItem(`requestStatus_${_id}`, requestStatus);
+        }
+    }, [requestStatus, _id]);
 
     return (
         <div className="bg-base-100 border border-base-300 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all flex flex-col gap-3">
@@ -42,12 +83,11 @@ const AssetCard = ({ asset, onDelete, onRequest }) => {
                 {/* Show Request Asset button for employees */}
                 {role === "employee" ? (
                     <button 
-                        disabled={productQuantity === 0}
-                        onClick={() => onRequest(asset)}
+                        onClick={() => handleRequest(asset)}
                         className="btn btn-primary btn-sm gap-2 w-full text-white shadow-md disabled:bg-base-300"
                     >
                         <FaHandPointer size={14} />
-                        {productQuantity > 0 ? "Request Asset" : "Out of Stock"}
+                        {requestStatus === 'pending' ? "Requesting..." : requestStatus === 'requested' ? "Requested" : productQuantity > 0 ? "Request Asset" : "Out of Stock"}
                     </button>
                 ) : (
                     // Show Edit and Delete buttons for non-employees (e.g., HR, Admin)
