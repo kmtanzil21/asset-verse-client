@@ -9,6 +9,7 @@ import MyAssets from "../Pages/MyAssets";
 import AddAsset from "../Pages/AddAsset";
 import Assets from "../Pages/Assets";
 import RequestList from "../Pages/RequestList";
+import ApprovedList from "../Pages/ApprovedList";
 
 export const router= createBrowserRouter([
     {
@@ -50,6 +51,10 @@ export const router= createBrowserRouter([
             {
                 path:'request-list',
                 Component: RequestList
+            },
+            {
+                path:'approved-list',
+                Component:ApprovedList
             }
         ]
 
