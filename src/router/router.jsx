@@ -10,6 +10,7 @@ import AddAsset from "../Pages/AddAsset";
 import Assets from "../Pages/Assets";
 import RequestList from "../Pages/RequestList";
 import ApprovedList from "../Pages/ApprovedList";
+import ApprovedEmployeeList from "../Pages/ApprovedEmployeeList";
 
 export const router= createBrowserRouter([
     {
@@ -55,6 +56,10 @@ export const router= createBrowserRouter([
             {
                 path:'approved-list',
                 Component:ApprovedList
+            },
+            {
+                path:'employee-list',
+                Component:ApprovedEmployeeList
             }
         ]
 
