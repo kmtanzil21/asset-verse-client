@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { FaEdit, FaTrashAlt, FaHandPointer } from "react-icons/fa";
 import { AuthContext } from '../Contexts/AuthContext';
 import useAxios from '../hooks/useAxios';
+import { Link } from 'react-router';
 
 const AssetCard = ({ asset, handleDelete }) => {
     const { role } = useContext(AuthContext);
@@ -40,8 +41,6 @@ const AssetCard = ({ asset, handleDelete }) => {
     };
 
     useEffect(() => {
-        // Ensure that if the status is set externally (e.g., after a successful request)
-        // we sync it with localStorage (this could also be done on backend if needed)
         if (requestStatus) {
             localStorage.setItem(`requestStatus_${_id}`, requestStatus);
         }
@@ -92,9 +91,11 @@ const AssetCard = ({ asset, handleDelete }) => {
                 ) : (
                     // Show Edit and Delete buttons for non-employees (e.g., HR, Admin)
                     <div className="flex gap-2">
+                        <Link to={`/dashboard/edit-asset/${_id}`}>
                         <button className="btn btn-outline btn-info flex-1 btn-sm gap-2">
                             <FaEdit size={14} /> Edit
                         </button>
+                        </Link>
                         <button 
                             onClick={() => handleDelete(_id)}
                             className="btn btn-outline btn-error flex-1 btn-sm gap-2"

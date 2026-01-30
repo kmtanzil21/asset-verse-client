@@ -15,6 +15,7 @@ import ApprovedList from "../Pages/ApprovedList";
 import ApprovedEmployeeList from "../Pages/ApprovedEmployeeList";
 import UpgradePackage from "../Pages/UpgradePackage";
 import PaymentSuccess from "../Pages/PaymentSuccess";
+import EditAsset from "../Pages/EditAsset";
 
 export const router = createBrowserRouter([
     {
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
                 path: 'payment-success',
                 Component: PaymentSuccess,
             },
+            {
+                path:'edit-asset/:id',
+                Component:EditAsset
+            }
         ]
     }
 ]);
