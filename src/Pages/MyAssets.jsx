@@ -61,7 +61,7 @@ const MyAssets = () => {
                             key={asset._id} 
                             asset={asset} 
                             role="hr" // Explicitly setting role to show Edit/Delete
-                            onDelete={handleDelete}
+                            handleDelete={handleDelete}
                         />
                     ))}
                 </div>

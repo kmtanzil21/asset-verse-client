@@ -3,7 +3,7 @@ import { Link, NavLink, Outlet } from 'react-router';
 import { BiSolidDevices } from "react-icons/bi";
 import { MdAddToQueue, MdFormatListBulletedAdd, MdOutlineChecklist } from "react-icons/md";
 import { IoPersonSharp } from "react-icons/io5";
-
+import { GrUpgrade } from "react-icons/gr";
 
 
 
@@ -74,6 +74,12 @@ const DashboardLayout = () => {
               <NavLink to="employee-list" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Approved Employee List">
                 <IoPersonSharp />
                 <span className="is-drawer-close:hidden">Approved Employee List</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="upgrade-package" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Upgrade Package">
+                <GrUpgrade/>
+                <span className="is-drawer-close:hidden">Upgrade Package</span>
               </NavLink>
             </li>
 

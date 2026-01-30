@@ -3,7 +3,7 @@ import { FaEdit, FaTrashAlt, FaHandPointer } from "react-icons/fa";
 import { AuthContext } from '../Contexts/AuthContext';
 import useAxios from '../hooks/useAxios';
 
-const AssetCard = ({ asset, onDelete }) => {
+const AssetCard = ({ asset, handleDelete }) => {
     const { role } = useContext(AuthContext);
     const { _id, productName, productType, productQuantity, productImage, dateAdded } = asset;
     const { user } = useContext(AuthContext);
@@ -96,7 +96,7 @@ const AssetCard = ({ asset, onDelete }) => {
                             <FaEdit size={14} /> Edit
                         </button>
                         <button 
-                            onClick={() => onDelete(_id)}
+                            onClick={() => handleDelete(_id)}
                             className="btn btn-outline btn-error flex-1 btn-sm gap-2"
                         >
                             <FaTrashAlt size={14} /> Delete

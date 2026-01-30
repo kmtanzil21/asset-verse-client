@@ -1,3 +1,5 @@
+// router.js
+
 import { createBrowserRouter } from "react-router";
 import RootLayout from "../Layout/RootLayout";
 import Home from "../Pages/Home";
@@ -11,58 +13,46 @@ import Assets from "../Pages/Assets";
 import RequestList from "../Pages/RequestList";
 import ApprovedList from "../Pages/ApprovedList";
 import ApprovedEmployeeList from "../Pages/ApprovedEmployeeList";
+import UpgradePackage from "../Pages/UpgradePackage";
+import PaymentSuccess from "../Pages/PaymentSuccess";
 
-export const router= createBrowserRouter([
+export const router = createBrowserRouter([
     {
         path: '/',
-        Component:RootLayout,
-        children:[
+        Component: RootLayout,
+        children: [
             {
                 index: true,
-                Component:Home
+                Component: Home,
             },
             {
-                path:"/register",
-                Component: Register
+                path: "/register",
+                Component: Register,
             },
             {
-                path:'/login',
-                Component:Login
+                path: '/login',
+                Component: Login,
             },
             {
-                path:'/assets',
-                Component:Assets
-            }
+                path: '/assets',
+                Component: Assets,
+            },
         ]
     },
     {
-        path:'/dashboard',
-        element: <PrivateRoute>
-            <DashboardLayout></DashboardLayout>
-        </PrivateRoute>,
-        children:[
+        path: '/dashboard',
+        element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
+        children: [
+            { path: 'my-assets', Component: MyAssets },
+            { path: 'add-asset', Component: AddAsset },
+            { path: 'request-list', Component: RequestList },
+            { path: 'approved-list', Component: ApprovedList },
+            { path: 'employee-list', Component: ApprovedEmployeeList },
+            { path: 'upgrade-package', Component: UpgradePackage },
             {
-                path:'my-assets',
-                Component:MyAssets
+                path: 'payment-success',
+                Component: PaymentSuccess,
             },
-            {
-                path:'add-asset',
-                Component: AddAsset
-            },
-            {
-                path:'request-list',
-                Component: RequestList
-            },
-            {
-                path:'approved-list',
-                Component:ApprovedList
-            },
-            {
-                path:'employee-list',
-                Component:ApprovedEmployeeList
-            }
         ]
-
-
     }
-])
+]);
