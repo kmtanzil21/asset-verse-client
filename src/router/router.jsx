@@ -18,6 +18,7 @@ import PaymentSuccess from "../Pages/PaymentSuccess";
 import EditAsset from "../Pages/EditAsset";
 import EditProfile from "../Pages/EditProfile";
 import EmployeeAssets from "../Pages/EmployeeAssets";
+import MyHr from "../Pages/MyHr";
 
 export const router = createBrowserRouter([
     {
@@ -67,6 +68,10 @@ export const router = createBrowserRouter([
             {
                 path:'employee-assets',
                 Component:EmployeeAssets
+            },
+            {
+                path:'my-hr',
+                Component:MyHr
             }
         ]
     }

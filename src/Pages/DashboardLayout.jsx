@@ -3,7 +3,7 @@ import { Link, NavLink, Outlet } from 'react-router';
 import { BiSolidDevices } from "react-icons/bi";
 import { MdAddToQueue, MdFormatListBulletedAdd, MdOutlineChecklist } from "react-icons/md";
 import { IoPersonSharp } from "react-icons/io5";
-import { GrUpgrade } from "react-icons/gr";
+import { GrUpgrade, GrUserManager } from "react-icons/gr";
 import { FaUserEdit } from 'react-icons/fa';
 import { BsCassette } from "react-icons/bs";
 
@@ -89,6 +89,13 @@ const DashboardLayout = () => {
               <NavLink to="edit-profile" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Edit Profile">
                 <FaUserEdit />
                 <span className="is-drawer-close:hidden">Edit Profile</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="my-hr" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My HR">
+                <GrUserManager />
+
+                <span className="is-drawer-close:hidden">My-HR</span>
               </NavLink>
             </li>
             <li>
