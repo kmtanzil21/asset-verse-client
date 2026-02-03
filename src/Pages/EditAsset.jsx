@@ -19,7 +19,6 @@ const EditAsset = () => {
         }
     });
 
-    // Reset form with fetched data once loaded
     useEffect(() => {
         if (asset) reset(asset);
     }, [asset, reset]);

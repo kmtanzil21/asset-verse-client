@@ -16,6 +16,8 @@ import ApprovedEmployeeList from "../Pages/ApprovedEmployeeList";
 import UpgradePackage from "../Pages/UpgradePackage";
 import PaymentSuccess from "../Pages/PaymentSuccess";
 import EditAsset from "../Pages/EditAsset";
+import EditProfile from "../Pages/EditProfile";
+import EmployeeAssets from "../Pages/EmployeeAssets";
 
 export const router = createBrowserRouter([
     {
@@ -57,6 +59,14 @@ export const router = createBrowserRouter([
             {
                 path:'edit-asset/:id',
                 Component:EditAsset
+            },
+            {
+                path:'edit-profile',
+                Component:EditProfile
+            },
+            {
+                path:'employee-assets',
+                Component:EmployeeAssets
             }
         ]
     }

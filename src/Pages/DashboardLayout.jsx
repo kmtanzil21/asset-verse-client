@@ -4,6 +4,9 @@ import { BiSolidDevices } from "react-icons/bi";
 import { MdAddToQueue, MdFormatListBulletedAdd, MdOutlineChecklist } from "react-icons/md";
 import { IoPersonSharp } from "react-icons/io5";
 import { GrUpgrade } from "react-icons/gr";
+import { FaUserEdit } from 'react-icons/fa';
+import { BsCassette } from "react-icons/bs";
+
 
 
 
@@ -80,6 +83,19 @@ const DashboardLayout = () => {
               <NavLink to="upgrade-package" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Upgrade Package">
                 <GrUpgrade/>
                 <span className="is-drawer-close:hidden">Upgrade Package</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="edit-profile" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Edit Profile">
+                <FaUserEdit />
+                <span className="is-drawer-close:hidden">Edit Profile</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="employee-assets" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Employee Assets">
+                <BsCassette />
+
+                <span className="is-drawer-close:hidden">Employee Assets</span>
               </NavLink>
             </li>
 
