@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../Contexts/AuthContext';
 import useAxios from '../hooks/useAxios';
 import { useQuery } from '@tanstack/react-query';
@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 const MyHr = () => {
     const { user, loading } = useContext(AuthContext);
     const axiosPublic = useAxios();
+    const [selectedEmail, setSelectedEmail] = useState(null);
 
     const { data: requests = [], isLoading } = useQuery({
         queryKey: ['hr', user?.email],
@@ -16,7 +17,26 @@ const MyHr = () => {
         }
     });
 
+    const { data: colleagues = [], isLoading: isColleaguesLoading } = useQuery({
+        queryKey: ['colleagues', selectedEmail],
+        enabled: !!selectedEmail,
+        queryFn: async () => {
+            const res = await axiosPublic.get(`/colleagues?email=${selectedEmail}`);
+            return res.data;
+        }
+    });
+
     const uniqueHREmails = [...new Set(requests.map(req => req.hrEmail))];
+
+    // Filter colleagues to show only unique name and email pairs
+    const uniqueColleagues = Array.from(
+        new Map(colleagues.map(col => [col.email, col])).values()
+    );
+
+    const handleSeeColleague = (email) => {
+        setSelectedEmail(email);
+        document.getElementById('my_modal_5').showModal();
+    };
 
     if (loading || isLoading) {
         return <div className="p-10 text-center"><span className="loading loading-spinner"></span></div>;
@@ -30,9 +50,9 @@ const MyHr = () => {
                     <thead className="bg-gray-100">
                         <tr>
                             <th>#</th>
-                            <th>Photo</th>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,27 +60,40 @@ const MyHr = () => {
                             uniqueHREmails.map((email, index) => (
                                 <tr key={index}>
                                     <th>{index + 1}</th>
-                                    <td>
-                                        <div className="avatar">
-                                            <div className="mask mask-squircle w-12 h-12">
-                                                <img src="https://via.placeholder.com/150" alt="HR" />
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>HR Member</td> 
+                                    <td>HR Member</td>
                                     <td>{email}</td>
+                                    <td>
+                                        <button onClick={() => handleSeeColleague(email)} className='btn btn-primary'>See Colleagues</button>
+                                    </td>
                                 </tr>
                             ))
                         ) : (
                             <tr>
-                                <td colSpan="4" className="text-center py-6 text-gray-500">
-                                    No HR found.
-                                </td>
+                                <td colSpan="4" className="text-center py-6 text-gray-500">No HR found.</td>
                             </tr>
                         )}
                     </tbody>
                 </table>
             </div>
+
+            <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+                <div className="modal-box">
+                    <h3 className="font-bold text-lg">Colleagues for {selectedEmail}</h3>
+                    <div className="py-4">
+                        {isColleaguesLoading ? <span className="loading loading-spinner"></span> : 
+                        <ul className="space-y-2">
+                            {uniqueColleagues.map((col, idx) => (
+                                <li key={idx} className="border-b pb-1">{col.name} - {col.email}</li>
+                            ))}
+                        </ul>}
+                    </div>
+                    <div className="modal-action">
+                        <form method="dialog">
+                            <button className="btn">Close</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
         </div>
     );
 };
