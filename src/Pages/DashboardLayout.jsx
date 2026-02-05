@@ -6,11 +6,16 @@ import { IoPersonSharp } from "react-icons/io5";
 import { GrUpgrade, GrUserManager } from "react-icons/gr";
 import { FaUserEdit } from 'react-icons/fa';
 import { BsCassette } from "react-icons/bs";
+import useRole from '../hooks/useRole';
 
 
 
 
 const DashboardLayout = () => {
+  const {role}=useRole();
+  console.log(role);
+  console.log(typeof role, role);
+
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -46,7 +51,9 @@ const DashboardLayout = () => {
                 <span className="is-drawer-close:hidden">Homepage</span>
               </button>
             </li>
-            <li>
+           {
+            role==='hr'&&<>
+             <li>
               <NavLink to="my-assets" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Assets">
                 <BiSolidDevices />
                 <span className="is-drawer-close:hidden">My Assets</span>
@@ -85,13 +92,17 @@ const DashboardLayout = () => {
                 <span className="is-drawer-close:hidden">Upgrade Package</span>
               </NavLink>
             </li>
+            </>
+           }
             <li>
               <NavLink to="edit-profile" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Edit Profile">
                 <FaUserEdit />
                 <span className="is-drawer-close:hidden">Edit Profile</span>
               </NavLink>
             </li>
-            <li>
+            {
+              role==='employee'&&<>
+              <li>
               <NavLink to="my-hr" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My HR">
                 <GrUserManager />
 
@@ -104,7 +115,8 @@ const DashboardLayout = () => {
 
                 <span className="is-drawer-close:hidden">Employee Assets</span>
               </NavLink>
-            </li>
+            </li></>
+            }
 
             {/* List item */}
             <li>
