@@ -1,4 +1,3 @@
-// PaymentSuccess.jsx
 
 import React from 'react';
 

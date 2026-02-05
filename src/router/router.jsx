@@ -19,6 +19,8 @@ import EditAsset from "../Pages/EditAsset";
 import EditProfile from "../Pages/EditProfile";
 import EmployeeAssets from "../Pages/EmployeeAssets";
 import MyHr from "../Pages/MyHr";
+import HRRoute from "./HRRoute";
+import EmployeeRouter from "./EmployeeRouter";
 
 export const router = createBrowserRouter([
     {
@@ -47,19 +49,29 @@ export const router = createBrowserRouter([
         path: '/dashboard',
         element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
         children: [
-            { path: 'my-assets', Component: MyAssets },
-            { path: 'add-asset', Component: AddAsset },
-            { path: 'request-list', Component: RequestList },
-            { path: 'approved-list', Component: ApprovedList },
-            { path: 'employee-list', Component: ApprovedEmployeeList },
-            { path: 'upgrade-package', Component: UpgradePackage },
+            { path: 'my-assets', 
+            element:<HRRoute>
+            <MyAssets></MyAssets>
+            </HRRoute> },
+            { path: 'add-asset', 
+                element:<HRRoute>
+                <AddAsset></AddAsset>
+                </HRRoute>
+             },
+            { path: 'request-list',
+                element:<HRRoute>
+                <RequestList></RequestList></HRRoute>
+             },
+            { path: 'approved-list',element:<HRRoute><ApprovedList></ApprovedList></HRRoute> },
+            { path: 'employee-list', element:<HRRoute><ApprovedEmployeeList></ApprovedEmployeeList></HRRoute> },
+            { path: 'upgrade-package', element:<HRRoute><UpgradePackage></UpgradePackage></HRRoute> },
             {
                 path: 'payment-success',
                 Component: PaymentSuccess,
             },
             {
                 path:'edit-asset/:id',
-                Component:EditAsset
+                element:<HRRoute><EditAsset></EditAsset></HRRoute>
             },
             {
                 path:'edit-profile',
@@ -67,11 +79,11 @@ export const router = createBrowserRouter([
             },
             {
                 path:'employee-assets',
-                Component:EmployeeAssets
+                element:<EmployeeRouter><EmployeeAssets></EmployeeAssets></EmployeeRouter>
             },
             {
                 path:'my-hr',
-                Component:MyHr
+                element:<EmployeeRouter><MyHr></MyHr></EmployeeRouter>
             }
         ]
     }

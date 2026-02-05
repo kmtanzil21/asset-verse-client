@@ -26,7 +26,7 @@ const UpgradePackage = () => {
                 email: user?.email
             });
             if (res.data.url) {
-                window.location.href = res.data.url; // Redirect to Stripe's checkout page
+                window.location.assign(res.data.url); // Redirect to Stripe's checkout page
             }
         } catch (error) {
             console.error("Checkout failed:", error);
