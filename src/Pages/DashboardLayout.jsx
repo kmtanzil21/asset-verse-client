@@ -7,6 +7,8 @@ import { GrUpgrade, GrUserManager } from "react-icons/gr";
 import { FaUserEdit } from 'react-icons/fa';
 import { BsCassette } from "react-icons/bs";
 import useRole from '../hooks/useRole';
+import { LuHistory } from "react-icons/lu";
+
 
 
 
@@ -98,6 +100,12 @@ const DashboardLayout = () => {
               <NavLink to="edit-profile" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Edit Profile">
                 <FaUserEdit />
                 <span className="is-drawer-close:hidden">Edit Profile</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="payment-history" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Payment History">
+                <LuHistory />
+                <span className="is-drawer-close:hidden">Payment History</span>
               </NavLink>
             </li>
             {

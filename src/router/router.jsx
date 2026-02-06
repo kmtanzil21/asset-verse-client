@@ -21,6 +21,7 @@ import EmployeeAssets from "../Pages/EmployeeAssets";
 import MyHr from "../Pages/MyHr";
 import HRRoute from "./HRRoute";
 import EmployeeRouter from "./EmployeeRouter";
+import PaymentHistory from "../Pages/PaymentHistory";
 
 export const router = createBrowserRouter([
     {
@@ -72,6 +73,10 @@ export const router = createBrowserRouter([
             {
                 path:'edit-asset/:id',
                 element:<HRRoute><EditAsset></EditAsset></HRRoute>
+            },
+            {
+                path:'payment-history',
+                element:<HRRoute><PaymentHistory></PaymentHistory></HRRoute>
             },
             {
                 path:'edit-profile',
