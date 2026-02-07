@@ -8,6 +8,8 @@ import { FaUserEdit } from 'react-icons/fa';
 import { BsCassette } from "react-icons/bs";
 import useRole from '../hooks/useRole';
 import { LuHistory } from "react-icons/lu";
+import { CgProfile } from "react-icons/cg";
+
 
 
 
@@ -94,20 +96,17 @@ const DashboardLayout = () => {
                 <span className="is-drawer-close:hidden">Upgrade Package</span>
               </NavLink>
             </li>
-            </>
-           }
-            <li>
-              <NavLink to="edit-profile" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Edit Profile">
-                <FaUserEdit />
-                <span className="is-drawer-close:hidden">Edit Profile</span>
-              </NavLink>
-            </li>
-            <li>
+
+             <li>
               <NavLink to="payment-history" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Payment History">
                 <LuHistory />
                 <span className="is-drawer-close:hidden">Payment History</span>
               </NavLink>
             </li>
+            </>
+           }
+           
+           
             {
               role==='employee'&&<>
               <li>
@@ -125,6 +124,15 @@ const DashboardLayout = () => {
               </NavLink>
             </li></>
             }
+
+             <li>
+              <NavLink to="profile" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Profile">
+               <CgProfile />
+
+
+                <span className="is-drawer-close:hidden">Profile</span>
+              </NavLink>
+            </li>
 
             {/* List item */}
             <li>

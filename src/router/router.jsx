@@ -22,6 +22,7 @@ import MyHr from "../Pages/MyHr";
 import HRRoute from "./HRRoute";
 import EmployeeRouter from "./EmployeeRouter";
 import PaymentHistory from "../Pages/PaymentHistory";
+import Profile from "../Pages/Profile";
 
 export const router = createBrowserRouter([
     {
@@ -89,6 +90,10 @@ export const router = createBrowserRouter([
             {
                 path:'my-hr',
                 element:<EmployeeRouter><MyHr></MyHr></EmployeeRouter>
+            },
+            {
+                path:'profile',
+                Component:Profile
             }
         ]
     }
