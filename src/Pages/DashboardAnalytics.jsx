@@ -14,7 +14,7 @@ const DashboardAnalytics = () => {
 
     useEffect(() => {
         const fetchAnalytics = async () => {
-            if (ugit ser?.email) {
+            if (user?.email) {
                 try {
                     const [pieRes, barRes] = await Promise.all([
                         axiosSecure.get(`/asset-distribution?email=${user.email}`),
