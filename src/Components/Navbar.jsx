@@ -30,7 +30,7 @@ const Navbar = () => {
             {/* You can add conditional links here based on user role later */}
             {user && (
                 <>
-                    <li><NavLink to="/dashboard/my-assets">My Assets</NavLink></li>
+                    <li><NavLink to="/dashboard">My Assets</NavLink></li>
                     <li><NavLink to="/assets">Assets</NavLink></li>
                     
                 </>

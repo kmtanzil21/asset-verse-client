@@ -1,5 +1,3 @@
-// router.js
-
 import { createBrowserRouter } from "react-router";
 import RootLayout from "../Layout/RootLayout";
 import Home from "../Pages/Home";
@@ -23,6 +21,8 @@ import HRRoute from "./HRRoute";
 import EmployeeRouter from "./EmployeeRouter";
 import PaymentHistory from "../Pages/PaymentHistory";
 import Profile from "../Pages/Profile";
+import DashboardAnalytics from "../Pages/DashboardAnalytics";
+import DashboardHome from "../Pages/DashboardHome";
 
 export const router = createBrowserRouter([
     {
@@ -51,49 +51,63 @@ export const router = createBrowserRouter([
         path: '/dashboard',
         element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
         children: [
-            { path: 'my-assets', 
-            element:<HRRoute>
-            <MyAssets></MyAssets>
-            </HRRoute> },
-            { path: 'add-asset', 
-                element:<HRRoute>
-                <AddAsset></AddAsset>
-                </HRRoute>
-             },
-            { path: 'request-list',
-                element:<HRRoute>
-                <RequestList></RequestList></HRRoute>
-             },
-            { path: 'approved-list',element:<HRRoute><ApprovedList></ApprovedList></HRRoute> },
-            { path: 'employee-list', element:<HRRoute><ApprovedEmployeeList></ApprovedEmployeeList></HRRoute> },
-            { path: 'upgrade-package', element:<HRRoute><UpgradePackage></UpgradePackage></HRRoute> },
+            // ✅ Fix: Only HR should see the Analytics by default
+            {
+                index: true,
+                element: <DashboardHome></DashboardHome>
+            },
+            { 
+                path: 'my-assets', 
+                element: <HRRoute><MyAssets /></HRRoute> 
+            },
+            { 
+                path: 'add-asset', 
+                element: <HRRoute><AddAsset /></HRRoute>
+            },
+            { 
+                path: 'request-list',
+                element: <HRRoute><RequestList /></HRRoute>
+            },
+            { 
+                path: 'approved-list', 
+                element: <HRRoute><ApprovedList /></HRRoute> 
+            },
+            { 
+                path: 'employee-list', 
+                element: <HRRoute><ApprovedEmployeeList /></HRRoute> 
+            },
+            { 
+                path: 'upgrade-package', 
+                element: <HRRoute><UpgradePackage /></HRRoute> 
+            },
             {
                 path: 'payment-success',
                 Component: PaymentSuccess,
             },
             {
-                path:'edit-asset/:id',
-                element:<HRRoute><EditAsset></EditAsset></HRRoute>
+                path: 'edit-asset/:id',
+                element: <HRRoute><EditAsset /></HRRoute>
             },
             {
-                path:'payment-history',
-                element:<HRRoute><PaymentHistory></PaymentHistory></HRRoute>
+                path: 'payment-history',
+                element: <HRRoute><PaymentHistory /></HRRoute>
             },
             {
-                path:'edit-profile',
-                Component:EditProfile
+                path: 'edit-profile',
+                Component: EditProfile
             },
             {
-                path:'employee-assets',
-                element:<EmployeeRouter><EmployeeAssets></EmployeeAssets></EmployeeRouter>
+                path: 'profile',
+                Component: Profile
+            },
+            // ✅ Employee Specific Routes
+            {
+                path: 'employee-assets',
+                element: <EmployeeRouter><EmployeeAssets /></EmployeeRouter>
             },
             {
-                path:'my-hr',
-                element:<EmployeeRouter><MyHr></MyHr></EmployeeRouter>
-            },
-            {
-                path:'profile',
-                Component:Profile
+                path: 'my-hr',
+                element: <EmployeeRouter><MyHr /></EmployeeRouter>
             }
         ]
     }
