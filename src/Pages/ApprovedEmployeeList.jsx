@@ -10,22 +10,21 @@ const ApprovedEmployeeList = () => {
     const [myAssets, setMyAssets] = useState([]);
     const [selectedEmployee, setSelectedEmployee] = useState(null);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                // Fetch approved employees for this HR
-                const empRes = await axiosPublic.get(`/hr/${user.email}/approved-employees`);
-                setEmployees(empRes.data.employees);
+ useEffect(() => {
+    const fetchData = async () => {
+        try {
+            // ✅ FIX: Access the data directly since the backend returns an array
+            const empRes = await axiosPublic.get(`/employee/${user.email}`);
+            setEmployees(empRes.data); // Removed .employees
 
-                // Fetch assets added by this HR
-                const assetRes = await axiosPublic.get(`/my-assets?email=${user.email}`);
-                setMyAssets(assetRes.data);
-            } catch (error) {
-                console.error("Error loading data:", error);
-            }
-        };
-        if (user?.email) fetchData();
-    }, [user.email, axiosPublic]);
+            const assetRes = await axiosPublic.get(`/my-assets?email=${user.email}`);
+            setMyAssets(assetRes.data);
+        } catch (error) {
+            console.error("Error loading data:", error);
+        }
+    };
+    if (user?.email) fetchData();
+}, [user.email, axiosPublic]);
 
     const handleAssignDirectly = async (asset) => {
         // Data structure matching your image
@@ -55,6 +54,45 @@ const ApprovedEmployeeList = () => {
             Swal.fire("Error", error.response?.data?.message || "Assignment failed", "error");
         }
     };
+
+    const handleDeleteEmployee = (employee) => {
+    // 1. Trigger the SweetAlert confirmation
+    Swal.fire({
+        title: "Are you sure?",
+        text: `You are about to remove ${employee.name} from your employee list.`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!"
+    }).then(async (result) => {
+        // 2. Only proceed if the user clicked "Yes"
+        if (result.isConfirmed) {
+            try {
+                // 3. Make the API call (Note the 'await' and leading '/')
+                const res = await axiosPublic.delete(`/employee-delete/${employee.email}?hrEmail=${user.email}`);
+
+                if (res.data.deletedCount > 0) {
+                    // 4. Update the local UI state
+                    const remaining = employees.filter(emp => emp.email !== employee.email);
+                    setEmployees(remaining);
+
+                    // 5. Success notification
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Employee has been removed.",
+                        icon: "success",
+                        timer: 1500,
+                        showConfirmButton: false
+                    });
+                }
+            } catch (error) {
+                console.error("Delete Error:", error);
+                Swal.fire("Error!", "Something went wrong while deleting.", "error");
+            }
+        }
+    });
+};
 
     return (
         <div className="p-10">
@@ -86,6 +124,8 @@ const ApprovedEmployeeList = () => {
                                     >
                                         Assign Asset
                                     </button>
+
+                                    <button onClick={()=>{handleDeleteEmployee(emp)}} className='btn btn-secondary btn-sm px-6 mx-2'>Delete Employee</button>
                                 </td>
                             </tr>
                         ))}
